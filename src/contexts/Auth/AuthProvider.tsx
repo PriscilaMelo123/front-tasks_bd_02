@@ -20,10 +20,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const data = await api.signin(name, pass);
     if (data.ok) {
       setUser(data);
-      // setUserName(data.data.userName);
-      // setUserId(data.data.userId);
+      setUserName(data.data.name);
+      setUserId(data.data.id);
       setToken(data.token);
-      setData(data);
+      setData(data.data.tasks);
       return true;
     }
     return false;
@@ -33,7 +33,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const data = await api.signup(name, pass, Rpass);
     if (data.ok) {
       setUser(data);
+      setUserName(data.data.name);
+      setUserId(data.data.id);
       setToken(data.token);
+      setData(data);
       return true;
     }
     return false;
@@ -44,6 +47,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     setUser(null);
     setToken("");
     setData("");
+    setUserName("");
+    setUserId("");
     //await api.logout();
   };
 
@@ -62,6 +67,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const data = await api.createTask(description, detail);
     if (data.ok) {
       setUser(data);
+      setData(data.data.tasks);
       return true;
     }
     return false;
@@ -90,12 +96,12 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     localStorage.setItem("authData", JSON.stringify(data));
   };
 
-  const setUserName = (data: string) => {
-    localStorage.setItem("authName", JSON.stringify(data));
+  const setUserName = (name: string) => {
+    localStorage.setItem("authName", name);
   };
 
-  const setUserId = (data: string) => {
-    localStorage.setItem("authId", JSON.stringify(data));
+  const setUserId = (id: string) => {
+    localStorage.setItem("authId", id);
   };
 
   return (

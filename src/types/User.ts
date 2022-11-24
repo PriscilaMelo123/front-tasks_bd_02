@@ -22,4 +22,5 @@ export interface Recado {
   id: any;
   description?: string;
   detail?: string;
+  arquivada?: boolean;
 }

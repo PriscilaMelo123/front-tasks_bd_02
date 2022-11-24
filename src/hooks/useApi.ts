@@ -34,7 +34,8 @@ export const useApi = () => ({
   },
 
   createTask: async (description: string, detail: string) => {
-    const response = await api.post("/tasks/", { description, detail });
+    const idUser = localStorage.getItem("authId");
+    const response = await api.post("/tasks/", { description, detail, idUser });
     return response.data;
   },
 

@@ -4,8 +4,6 @@ import "./Recados.css";
 import { useNavigate } from "react-router-dom";
 import { Recado } from "../../types/User";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -19,8 +17,9 @@ export const Recados: any = () => {
   function newTask() {
     navigate("/new_tasks");
   }
-
   const userToken = localStorage.getItem("authToken");
+  const name = localStorage.getItem("authName");
+  // const tasks = localStorage.getItem("authData");
 
   const handleLogout = async () => {
     await auth.signout();
@@ -28,9 +27,13 @@ export const Recados: any = () => {
   };
 
   const handleLoadTask = async () => {
-    if (userToken) {
-      const tasks = await auth.loadTask(userToken);
-      setTasks(tasks);
+    const tasks = localStorage.getItem("authData");
+    if (tasks) {
+      const teste = JSON.parse(tasks);
+      console.log(teste);
+
+      // const tasks = await auth.loadTask(userToken);
+      setTasks(teste);
     }
   };
 
@@ -64,6 +67,7 @@ export const Recados: any = () => {
     <tr key={task.id}>
       <td className='text-start'>{task.description}</td>
       <td className='text-start'>{task.detail}</td>
+      <td className='text-start'>{task.arquivada}</td>
       <td>
         <button
           className='btn btn-primary m-1'
@@ -85,6 +89,7 @@ export const Recados: any = () => {
     <tr key={task.id}>
       <td className='text-start'>{task.description}</td>
       <td className='text-start'>{task.detail}</td>
+      <td className='text-start'>{task.arquivada}</td>
       <td>
         <button
           className='btn btn-primary m-1'
@@ -122,7 +127,7 @@ export const Recados: any = () => {
             <div className=''>
               <h1 className='fw-bold text-center p-2'>Meus Recados</h1>
               <h2 className='text-center p-2'>
-                Bem vindo -{" "}
+                Bem vindo - {name}
                 <span className='text-center text-decoration-underline fs-4 p-2'></span>
               </h2>
               <div>
@@ -161,6 +166,7 @@ export const Recados: any = () => {
                   <tr className='fw-bold text-start'>
                     <th>Descrição</th>
                     <th>Detalhamento</th>
+                    <th>Arquivadas</th>
                     <th className='text-center'>Ações</th>
                   </tr>
                 </thead>
