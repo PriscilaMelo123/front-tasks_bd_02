@@ -29,13 +29,20 @@ export const useApi = () => ({
   },
 
   loadTask: async () => {
-    const response = await api.get(`/tasks`);
+    const idUser = localStorage.getItem("authId");
+    const response = await api.get(`/user/${idUser}`);
     return response.data;
   },
 
   createTask: async (description: string, detail: string) => {
-    // const idUser = localStorage.getItem("authId");
-    const response = await api.post("/tasks/", { description, detail });
+    const idUser = localStorage.getItem("authId");
+    // const teste = false;
+    const response = await api.post("/tasks/", {
+      description,
+      detail,
+      idUser,
+    });
+    console.log(response);
     return response.data;
   },
 

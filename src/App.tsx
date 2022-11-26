@@ -44,6 +44,7 @@ function App() {
             </RequireAuth>
           }
         />
+
         <Route
           path='/edit_tasks/:id'
           element={

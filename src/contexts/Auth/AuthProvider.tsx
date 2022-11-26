@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     if (token) {
       const data = await api.loadTask();
       if (data) {
-        setUser(data.data);
+        setUser(data.data.tasks);
         return data.data;
       }
     }

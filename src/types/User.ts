@@ -19,8 +19,9 @@ export interface Data {
 }
 
 export interface Recado {
-  id: any;
+  id?: any;
   description?: string;
   detail?: string;
+  idUser?: string;
   arquivada?: boolean;
 }

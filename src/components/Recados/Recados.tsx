@@ -19,7 +19,6 @@ export const Recados: any = () => {
   }
   const userToken = localStorage.getItem("authToken");
   const name = localStorage.getItem("authName");
-  // const tasks = localStorage.getItem("authData");
 
   const handleLogout = async () => {
     await auth.signout();
@@ -28,17 +27,9 @@ export const Recados: any = () => {
 
   const handleLoadTask = async () => {
     if (userToken) {
-      const tasks = await auth.loadTask(userToken);
-      setTasks(tasks);
+      const data = await auth.loadTask(userToken);
+      setTasks(data.tasks);
     }
-    // const tasks = localStorage.getItem("authData");
-    // if (tasks) {
-    //   const teste = JSON.parse(tasks);
-    //   console.log(teste);
-
-    //   // const tasks = await auth.loadTask(userToken);
-    //   setTasks(teste);
-    // }
   };
 
   async function handleDeletTask(id: string) {
