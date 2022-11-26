@@ -27,14 +27,18 @@ export const Recados: any = () => {
   };
 
   const handleLoadTask = async () => {
-    const tasks = localStorage.getItem("authData");
-    if (tasks) {
-      const teste = JSON.parse(tasks);
-      console.log(teste);
-
-      // const tasks = await auth.loadTask(userToken);
-      setTasks(teste);
+    if (userToken) {
+      const tasks = await auth.loadTask(userToken);
+      setTasks(tasks);
     }
+    // const tasks = localStorage.getItem("authData");
+    // if (tasks) {
+    //   const teste = JSON.parse(tasks);
+    //   console.log(teste);
+
+    //   // const tasks = await auth.loadTask(userToken);
+    //   setTasks(teste);
+    // }
   };
 
   async function handleDeletTask(id: string) {
